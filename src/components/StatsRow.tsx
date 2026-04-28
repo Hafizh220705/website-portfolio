@@ -1,9 +1,9 @@
 export default function StatsRow() {
   const stats = [
     { label: "GPA", value: "3.78 / 4.00" },
-    { label: "Projects Completed", value: "10+" },
-    { label: "Records Analyzed", value: "443K+" },
-    { label: "Certifications", value: "7" },
+    { label: "Projects Completed", value: "15+" },
+    { label: "Records Analyzed", value: "446K+" },
+    { label: "Certifications", value: "20+" },
   ];
 
   return (

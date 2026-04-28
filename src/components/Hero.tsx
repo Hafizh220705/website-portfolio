@@ -3,39 +3,39 @@
 import { useEffect, useMemo, useState } from "react";
 
 export default function Hero() {
-  const roles = useMemo(
-    () => ["Data Scientist", "Data Analyst", "ML Engineer", "BI Developer"],
-    []
-  );
+  // const roles = useMemo(
+  //   () => ["Data Scientist", "Data Analyst", "ML Engineer", "BI Developer"],
+  //   []
+  // );
 
   const [roleIndex, setRoleIndex] = useState(0);
   const [typed, setTyped] = useState("");
   const [isDeleting, setIsDeleting] = useState(false);
 
-  useEffect(() => {
-    const fullText = roles[roleIndex];
-    const typingSpeed = isDeleting ? 35 : 55;
-    const pauseAfterTyped = 1400;
+  // useEffect(() => {
+  //   const fullText = roles[roleIndex];
+  //   const typingSpeed = isDeleting ? 35 : 55;
+  //   const pauseAfterTyped = 1400;
 
-    const timer = setTimeout(() => {
-      if (!isDeleting) {
-        const next = fullText.slice(0, typed.length + 1);
-        setTyped(next);
-        if (next === fullText) {
-          setTimeout(() => setIsDeleting(true), pauseAfterTyped);
-        }
-      } else {
-        const next = fullText.slice(0, typed.length - 1);
-        setTyped(next);
-        if (next === "") {
-          setIsDeleting(false);
-          setRoleIndex((i) => (i + 1) % roles.length);
-        }
-      }
-    }, typingSpeed);
+  //   const timer = setTimeout(() => {
+  //     if (!isDeleting) {
+  //       const next = fullText.slice(0, typed.length + 1);
+  //       setTyped(next);
+  //       if (next === fullText) {
+  //         setTimeout(() => setIsDeleting(true), pauseAfterTyped);
+  //       }
+  //     } else {
+  //       const next = fullText.slice(0, typed.length - 1);
+  //       setTyped(next);
+  //       if (next === "") {
+  //         setIsDeleting(false);
+  //         setRoleIndex((i) => (i + 1) % roles.length);
+  //       }
+  //     }
+  //   }, typingSpeed);
 
-    return () => clearTimeout(timer);
-  }, [typed, isDeleting, roleIndex, roles]);
+  //   return () => clearTimeout(timer);
+  // }, [typed, isDeleting, roleIndex, roles]);
 
   return (
     <section className="min-h-[80vh] flex items-center mb-8 relative" id="hero">
@@ -53,23 +53,23 @@ export default function Hero() {
 
           {/* Headline */}
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white leading-[1.05] tracking-tight mb-6">
-            I Turn Raw Data into{" "}
+            I Transform Data into{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-fuchsia-400">
               Actionable Insights
             </span>{" "}
-            that drive smarter business decisions.
+            that Drive Smarter Business Decisions.
           </h1>
 
           {/* Typing Subtitle */}
-          <div className="text-lg text-neutral-400 mb-3 h-8 flex items-center">
+          {/* <div className="text-lg text-neutral-400 mb-3 h-8 flex items-center">
             <span className="text-neutral-500 mr-2">→</span>
             <span className="text-violet-300/80 font-medium">{typed}</span>
             <span className="ml-0.5 inline-block h-5 w-[2px] bg-violet-400/60 animate-pulse" />
-          </div>
+          </div> */}
 
           {/* Description */}
           <p className="text-neutral-400 text-base sm:text-lg leading-relaxed mb-10 max-w-xl">
-            6th-semester Computer Science student at Universitas Padjadjaran (GPA 3.78/4.00), specializing in Data Analytics, Business Intelligence, and Machine Learning. I transform complex datasets into clear, data-driven stories that power strategic decisions.
+            Computer Science student at Universitas Padjadjaran specializing in Data Scientist and Data Analytics — transforming complex data into actionable insights and smarter business decisions.
           </p>
 
           {/* CTAs */}
@@ -82,7 +82,7 @@ export default function Hero() {
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14" /><path d="m12 5 7 7-7 7" /></svg>
             </a>
             <a
-              href="GDRIVE_LINK_PLACEHOLDER"
+              href="https://drive.google.com/file/d/1JVfNreqjd4LQPe2W0Lbo2MT8z1VHYQT-/view?usp=sharing"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white rounded-full font-semibold text-sm hover:from-violet-500 hover:to-fuchsia-500 transition-all duration-300 shadow-lg shadow-violet-500/20"

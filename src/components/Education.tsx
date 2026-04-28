@@ -18,14 +18,18 @@ export default function Education() {
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
             <div>
               <h3 className="text-base font-medium text-neutral-200 group-hover:text-blue-300 transition-colors">Universitas Padjadjaran</h3>
-              <p className="text-sm text-neutral-400 mt-1">Bachelor of Computer Science · GPA 3.78/4.00 (109 credits)</p>
+              <p className="text-sm text-neutral-400 mt-1">
+                Bachelor of Computer Science · GPA 3.78/4.00
+              </p>
             </div>
-            <span className="text-xs font-mono text-neutral-500 bg-neutral-950/50 px-2 py-1 rounded border border-neutral-800/50 whitespace-nowrap">Aug 2023 — Present</span>
+            <span className="text-xs font-mono text-neutral-500 bg-neutral-950/50 px-2 py-1 rounded border border-neutral-800/50 whitespace-nowrap">
+              Aug 2023 — Present
+            </span>
           </div>
-          <div className="text-sm text-neutral-500 leading-relaxed mt-3 max-w-2xl group-hover:text-neutral-400 transition-colors space-y-2">
-            <p><span className="text-neutral-400 font-medium">Coursework:</span> Statistics, Data Mining, Decision Support Systems, Database Systems I & II, AI, Numerical Methods</p>
-            <p><span className="text-neutral-400 font-medium">Achievements:</span> Team Leader of UNPAD Delegation (&ldquo;Warlok&rdquo;) for GEMASTIK 2025 Data Mining Competition · Semifinalist — Business Plan Competition IFEST (Oct 2025)</p>
-          </div>
+
+          <p className="text-sm text-neutral-500 leading-relaxed mt-3 max-w-2xl group-hover:text-neutral-400 transition-colors">
+            Focused on Data Analytics, Business Intelligence, Machine Learning, and software-driven problem solving through data and intelligent systems.
+          </p>
         </div>
 
         {/* Education 2: Dibimbing.id */}
@@ -33,13 +37,18 @@ export default function Education() {
           <div className="absolute -left-[39px] top-1.5 h-3.5 w-3.5 rounded-full border-[3px] border-neutral-950 bg-neutral-800 group-hover:bg-violet-500 transition-all duration-300 shadow-[0_0_0_4px_rgba(23,23,23,1)] z-10 group-hover:shadow-[0_0_0_4px_rgba(139,92,246,0.2)]" />
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-2">
             <div>
-              <h3 className="text-base font-medium text-neutral-200 group-hover:text-violet-300 transition-colors">Bootcamp Data Science & AI Machine Learning</h3>
+              <h3 className="text-base font-medium text-neutral-200 group-hover:text-violet-300 transition-colors">
+                Data Science & AI Machine Learning Bootcamp
+              </h3>
               <p className="text-sm text-neutral-400 mt-1">Dibimbing.id</p>
             </div>
-            <span className="text-xs font-mono text-neutral-500 bg-neutral-950/50 px-2 py-1 rounded border border-neutral-800/50 whitespace-nowrap">Mar 2026 — Present</span>
+            <span className="text-xs font-mono text-neutral-500 bg-neutral-950/50 px-2 py-1 rounded border border-neutral-800/50 whitespace-nowrap">
+              Mar 2026 — Present
+            </span>
           </div>
+
           <p className="text-sm text-neutral-500 leading-relaxed mt-3 max-w-2xl group-hover:text-neutral-400 transition-colors">
-            Advanced SQL, EDA, statistical hypothesis testing, data visualization, unsupervised learning (customer segmentation), supervised ML (demand forecasting, predictive classification).
+            Hands-on experience in SQL, data analytics, statistical analysis, machine learning, and predictive modeling for data-driven and intelligent solutions.
           </p>
         </div>
       </div>

@@ -1,207 +1,84 @@
-"use client";
-
-import { useMemo, useState } from "react";
-import Image from "next/image";
-import { experience, type ExperienceItem } from "@/src/data/experience";
-import { ArrowUpRight } from "lucide-react";
-
-type TabType = "work" | "education" | "organization" | "award";
-
-const MONTH_MAP: Record<string, number> = {
-  Jan: 0,
-  Feb: 1,
-  Mar: 2,
-  Apr: 3,
-  May: 4,
-  Jun: 5,
-  Jul: 6,
-  Aug: 7,
-  Sep: 8,
-  Oct: 9,
-  Nov: 10,
-  Dec: 11,
-};
-
-function parseStartDate(period: string): number {
-  // supports:
-  // "Feb 2025 — Dec 2025"
-  // "Aug 2023 — Aug 2027 (Expected)"
-  // "2024 — Present"
-  // "May 2025"
-  const clean = period.replace("(Expected)", "").trim();
-  const start = clean.split("—")[0].trim();
-  const parts = start.split(" ").filter(Boolean);
-
-  let year = 0;
-  let month = 0;
-
-  if (parts.length >= 2) {
-    month = MONTH_MAP[parts[0]] ?? 0;
-    year = Number(parts[1]);
-  } else {
-    year = Number(parts[0]);
-    month = 0;
-  }
-
-  return new Date(year, month).getTime();
-}
-
-function Logo({ text, src }: { text?: string; src?: string }) {
-  if (src) {
-    return (
-      <div className="relative h-12 w-12 overflow-hidden rounded-full border border-zinc-800 bg-zinc-950/60">
-        <Image
-          src={src}
-          alt={text ?? "Logo"}
-          fill
-          className="object-contain p-2"
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className="grid h-12 w-12 place-items-center rounded-full border border-zinc-800 bg-zinc-950/60 text-[10px] font-semibold text-zinc-200">
-      {text ?? "LOGO"}
-    </div>
-  );
-}
-
-function MetaLine({ item }: { item: ExperienceItem }) {
-  // baris tengah: org + optional location
-  const parts = [item.org];
-  if (item.location) parts.push(item.location);
-  return (
-    <div className="mt-1 text-sm text-zinc-300">
-      {parts.join(" · ")}
-    </div>
-  );
-}
-
-function ItemCard({ item }: { item: ExperienceItem }) {
-  return (
-    <div className="relative rounded-3xl border border-zinc-800 bg-zinc-950/40 p-6">
-      {/* 1) ROLE dulu (seperti contoh) */}
-      <div className="text-lg font-semibold text-zinc-100">
-        {item.role}
-      </div>
-
-      {/* 2) ORG + location */}
-      <MetaLine item={item} />
-
-      {/* 3) PERIOD paling bawah, small & muted */}
-      <div className="mt-1 text-sm text-zinc-500">{item.period}</div>
-
-      {/* Bullets */}
-      <ul className="mt-4 space-y-2 text-sm text-zinc-400">
-        {item.bullets.map((b, idx) => (
-          <li key={idx} className="flex gap-3">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-zinc-600" />
-            <span className="leading-relaxed">{b}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
-
-export default function Experience({ linkedinUrl }: { linkedinUrl: string }) {
-  const [tab, setTab] = useState<TabType>("work");
-
-  const tabs: { key: TabType; label: string }[] = [
-    { key: "work", label: "Work" },
-    { key: "education", label: "Education" },
-    { key: "organization", label: "Organization" },
-    { key: "award", label: "Award" },
+export default function ExperienceSection() {
+  const experiences = [
+    {
+      title: "Freelance Data Analyst",
+      company: "Self-Employed (Remote)",
+      period: "Jan 2026 — Present",
+      description: "Executed end-to-end analytics workflows for 10+ projects on datasets exceeding 100K+ records. Performed statistical hypothesis testing, built complex SQL queries, and created Power BI dashboards for data storytelling and business insights.",
+      color: "violet",
+    },
+    {
+      title: "Back End Developer",
+      company: "ElevatEd Indonesia (Remote Internship)",
+      period: "Aug 2025 — Dec 2025",
+      description: "Developed and maintained backend services for an AI-powered learning platform. Built and optimized RESTful APIs, integrated Supabase for authentication and database management, and collaborated with cross-functional teams for smooth backend–frontend integration.",
+      color: "emerald",
+    },
+    {
+      title: "Data Scientist Intern",
+      company: "PIPP, Universitas Padjadjaran",
+      period: "Sep 2025 — Dec 2025",
+      description: "Analyzed 1,000+ EEG signal segments using preprocessing and feature extraction. Developed and evaluated 5+ ML models (SVM, XGBoost) with LOSO/LOVO validation, improving model performance by 15–30%.",
+      color: "blue",
+    },
+    {
+      title: "Laboratory Teaching Assistant",
+      company: "Universitas Padjadjaran",
+      period: "Feb 2025 — Dec 2025",
+      description: "Facilitated lab sessions for 100+ students in Database Systems, Web Programming, and OOP. Evaluated 250+ assignments and mentored students in SQL, database integration, and problem-solving.",
+      color: "fuchsia",
+    },
+    {
+      title: "Data Scientist (Project-Based)",
+      company: "ID/X Partners (Remote)",
+      period: "Jan 2025 — Feb 2025",
+      description: "Analyzed 466K+ financial loan records using EDA and preprocessing to identify borrower risk patterns. Evaluated 6 predictive models (XGBoost, Random Forest) for credit risk assessment.",
+      color: "violet",
+    },
+    {
+      title: "IT Developer",
+      company: "Unpad Luhung (On-site, Jatinangor)",
+      period: "Jul 2025 — Dec 2025",
+      description: "Contributed to IT development initiatives at Universitas Padjadjaran's innovation unit, supporting digital systems and technology solutions.",
+      color: "emerald",
+    },
   ];
 
-  const tabIndex = tabs.findIndex((t) => t.key === tab);
-
-  const items = useMemo(() => {
-    return experience
-      .filter((e) => e.type === tab)
-      .sort((a, b) => parseStartDate(b.period) - parseStartDate(a.period));
-  }, [tab]);
+  const colorMap: Record<string, { dot: string; text: string; glow: string }> = {
+    violet: { dot: "group-hover:bg-violet-500", text: "group-hover:text-violet-300", glow: "group-hover:shadow-[0_0_0_4px_rgba(139,92,246,0.2)]" },
+    emerald: { dot: "group-hover:bg-emerald-500", text: "group-hover:text-emerald-300", glow: "group-hover:shadow-[0_0_0_4px_rgba(16,185,129,0.2)]" },
+    blue: { dot: "group-hover:bg-blue-500", text: "group-hover:text-blue-300", glow: "group-hover:shadow-[0_0_0_4px_rgba(59,130,246,0.2)]" },
+    fuchsia: { dot: "group-hover:bg-fuchsia-500", text: "group-hover:text-fuchsia-300", glow: "group-hover:shadow-[0_0_0_4px_rgba(217,70,239,0.2)]" },
+  };
 
   return (
-    <section id="experience" className="mt-20">
-      <div className="flex items-center justify-between">
-        <h2 className="text-3xl font-semibold tracking-tight">Experience</h2>
+    <section className="mb-32 relative p-8 md:p-12 rounded-[32px] border border-white/5 bg-neutral-900/20 backdrop-blur-md overflow-hidden shadow-2xl" id="experiences">
+      <div className="absolute -top-24 -right-24 w-96 h-96 bg-violet-500/5 rounded-full blur-[100px] pointer-events-none" />
+      <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-emerald-500/5 rounded-full blur-[100px] pointer-events-none" />
 
-        <a
-          href={linkedinUrl}
-          target="_blank"
-          rel="noreferrer"
-          className="inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-200 transition"
-        >
-          More <ArrowUpRight size={16} />
-        </a>
-      </div>
-
-      {/* Tabs (ambil warna dari Navbar) */}
-      <div className="mt-6">
-        <nav className="relative rounded-full border border-zinc-800 bg-zinc-950/70 p-2 backdrop-blur shadow-lg">
-          <span
-            className="absolute top-1 bottom-1 rounded-full bg-zinc-900 shadow transition-transform duration-300 ease-out"
-            style={{
-              width: `calc((100% - 0.5rem) / 4)`,
-              transform: `translateX(calc(${tabIndex} * 100%))`,
-              left: "0.25rem",
-            }}
-          />
-          <ul className="relative flex items-center gap-1">
-            {tabs.map((t) => {
-              const isActive = tab === t.key;
-              return (
-                <li key={t.key} className="flex-1">
-                  <button
-                    type="button"
-                    onClick={() => setTab(t.key)}
-                    className={[
-                      "relative z-10 inline-flex w-full items-center justify-center rounded-full px-4 py-2",
-                      "text-base font-semibold tracking-tight transition-colors duration-300",
-                      "cursor-pointer select-none",
-                      isActive ? "text-white" : "text-zinc-400 hover:text-zinc-200",
-                    ].join(" ")}
-                  >
-                    {t.label}
-                  </button>
-                </li>
-              );
-            })}
-          </ul>
-        </nav>
-      </div>
-
-      {/* Timeline */}
-      <div className="mt-6 rounded-3xl border border-zinc-800 bg-zinc-900/20 p-6">
-        <div key={tab} className="animate-fade-in">
-          <div className="relative">
-            <div className="absolute left-6 top-0 h-full w-px bg-zinc-800" />
-
-            <div className="space-y-8">
-              {items.length === 0 ? (
-                <div className="pl-16 text-sm text-zinc-400">
-                  No items yet for{" "}
-                  <span className="text-zinc-200">
-                    {tabs[tabIndex]?.label}
-                  </span>
-                  .
-                </div>
-              ) : (
-                items.map((item, idx) => (
-                  <div key={idx} className="relative pl-16">
-                    <div className="absolute left-0 top-4">
-                      {/* NOTE: butuh field item.logo di data kalau mau gambar */}
-                      <Logo text={item.logoText} src={(item as any).logo} />
-                    </div>
-                    <ItemCard item={item} />
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
+      <h2 className="relative flex items-center gap-3 text-xl font-medium text-neutral-100 tracking-tight mb-10">
+        <div className="flex items-center justify-center w-8 h-8 rounded-lg bg-violet-500/10 border border-violet-500/20 text-violet-400">
+          {/* @ts-expect-error iconify web component */}
+          <iconify-icon icon="solar:suitcase-linear" width="16" height="16" />
         </div>
+        Work Experience
+      </h2>
+
+      <div className="relative pl-8 border-l border-neutral-800 space-y-12 ml-3">
+        {experiences.map((exp) => {
+          const colors = colorMap[exp.color] || colorMap.violet;
+          return (
+            <div key={exp.title + exp.period} className="relative group">
+              <div className={`absolute -left-[39px] top-1.5 h-3.5 w-3.5 rounded-full border-[3px] border-neutral-950 bg-neutral-800 ${colors.dot} transition-all duration-300 shadow-[0_0_0_4px_rgba(23,23,23,1)] z-10 ${colors.glow}`} />
+              <div className="flex flex-col sm:flex-row sm:items-center mb-2 justify-between gap-2">
+                <h3 className={`text-base font-medium text-neutral-200 ${colors.text} transition-colors`}>{exp.title}</h3>
+                <span className="text-xs text-neutral-500 font-mono bg-neutral-950/50 px-2 py-1 rounded border border-neutral-800/50 whitespace-nowrap">{exp.period}</span>
+              </div>
+              <div className="text-sm text-neutral-400 mb-3 font-medium">{exp.company}</div>
+              <p className="text-sm text-neutral-500 leading-relaxed max-w-2xl group-hover:text-neutral-400 transition-colors">{exp.description}</p>
+            </div>
+          );
+        })}
       </div>
     </section>
   );

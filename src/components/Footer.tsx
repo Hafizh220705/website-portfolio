@@ -1,47 +1,31 @@
-import Link from "next/link";
-import { Linkedin, Github, Mail } from "lucide-react";
-
 export default function Footer() {
-  return (
-    <footer className="mt-24 border-t border-zinc-800 bg-zinc-950/80">
-      <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-6 text-sm text-zinc-400">
-        {/* Left */}
-        <div>
-          © {new Date().getFullYear()} hafizhfadhlmuhammad ·{" "}
-          <Link
-            href="/privacy"
-            className="hover:text-zinc-200 transition"
-          >
-            privacy policy
-          </Link>
-        </div>
+  const links = [
+    { href: "https://github.com/Hafizh220705", icon: "mdi:github", label: "GitHub", external: true },
+    { href: "https://www.linkedin.com/in/hafizhfadhlm/", icon: "mdi:linkedin", label: "LinkedIn", external: true },
+    { href: "https://instagram.com/hafizhfadhlm", icon: "mdi:instagram", label: "Instagram", external: true },
+    { href: "mailto:hafizhfadhl22@gmail.com", icon: "mdi:email-outline", label: "Email", external: false },
+  ];
 
-        {/* Right */}
-        <div className="flex items-center gap-4">
+  return (
+    <footer className="mt-24 py-8 border-t border-neutral-800/50 flex flex-col md:flex-row justify-between items-center gap-4 text-xs text-neutral-500">
+      <div className="flex items-center gap-2">
+        <span className="font-medium text-neutral-400">Hafizh Fadhl Muhammad</span>
+        <span>&copy; 2026</span>
+      </div>
+      <div className="flex items-center gap-6">
+        {links.map((link) => (
           <a
-            href="https://linkedin.com/in/USERNAME"
-            target="_blank"
-            className="hover:text-zinc-200 transition"
-            aria-label="LinkedIn"
+            key={link.label}
+            href={link.href}
+            target={link.external ? "_blank" : undefined}
+            rel={link.external ? "noopener noreferrer" : undefined}
+            className="flex items-center gap-1.5 hover:text-white transition-colors duration-200 group"
           >
-            <Linkedin size={18} />
+            {/* @ts-expect-error iconify web component */}
+            <iconify-icon icon={link.icon} width="16" height="16" class="opacity-60 group-hover:opacity-100 transition-opacity" />
+            <span>{link.label}</span>
           </a>
-          <a
-            href="https://github.com/USERNAME"
-            target="_blank"
-            className="hover:text-zinc-200 transition"
-            aria-label="GitHub"
-          >
-            <Github size={18} />
-          </a>
-          <a
-            href="mailto:youremail@example.com"
-            className="hover:text-zinc-200 transition"
-            aria-label="Email"
-          >
-            <Mail size={18} />
-          </a>
-        </div>
+        ))}
       </div>
     </footer>
   );
